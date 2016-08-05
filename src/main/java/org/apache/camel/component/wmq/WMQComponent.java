@@ -34,45 +34,10 @@ public class WMQComponent extends JmsComponent {
 
     @Override
     protected JmsConfiguration createConfiguration() {
-        Properties properties = new Properties();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("mq.properties");
-        try {
-            properties.load(inputStream);
-            String queueManager = "TEST1";
-            String hostname = properties.getProperty(queueManager + ".hostname");
-            String port = properties.getProperty(queueManager + ".port");
-            String channel = properties.getProperty(queueManager + ".channel");
+        ConnectionFactoryParameters connectionFactoryParameters = readParametersFrom("mq.properties");
+        MQConnectionFactory connectionFactory = createConnectionFactory(connectionFactoryParameters);
+        return new JmsConfiguration(connectionFactory);
 
-            MQConnectionFactory connectionFactory = createConnectionFactory(queueManager, hostname, port, channel);
-            return new JmsConfiguration(connectionFactory);
-
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot load mq.properties file", e);
-        }
-        finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException("Cannot close stream", e);
-            }
-        }
-
-    }
-
-    private MQConnectionFactory createConnectionFactory(String queueManager, String hostname, String port, String channel) {
-        MQConnectionFactory connectionFactory = new MQConnectionFactory();
-        try {
-            connectionFactory.setQueueManager(queueManager);
-            connectionFactory.setHostName(hostname);
-            connectionFactory.setChannel(channel);
-            connectionFactory.setPort(Integer.valueOf(port));
-            connectionFactory.setTransportType(1);
-        } catch (JMSException e) {
-            throw new RuntimeException("Cannot create connection factory", e);
-        }
-        return connectionFactory;
     }
 
     @Override
@@ -81,15 +46,62 @@ public class WMQComponent extends JmsComponent {
         String username = this.getAndRemoveParameter(parameters, "username", String.class);
         String password = this.getAndRemoveParameter(parameters, "password", String.class);
         if(username != null && password != null) {
+            JmsConfiguration configuration = endpoint.getConfiguration();
             UserCredentialsConnectionFactoryAdapter strategyVal = new UserCredentialsConnectionFactoryAdapter();
-            strategyVal.setTargetConnectionFactory(endpoint.getConfiguration().getConnectionFactory());
+            strategyVal.setTargetConnectionFactory(configuration.getConnectionFactory());
             strategyVal.setPassword(password);
             strategyVal.setUsername(username);
-            endpoint.getConfiguration().setConnectionFactory(strategyVal);
+            configuration.setConnectionFactory(strategyVal);
         } else if(username != null || password != null) {
             throw new IllegalArgumentException("The JmsComponent\'s username or password is null");
         }
         return endpoint;
+    }
+
+    private MQConnectionFactory createConnectionFactory(ConnectionFactoryParameters parameters) {
+        MQConnectionFactory connectionFactory = new MQConnectionFactory();
+        try {
+            connectionFactory.setQueueManager(parameters.getQueueManager());
+            connectionFactory.setHostName(parameters.getHostname());
+            connectionFactory.setChannel(parameters.getChannel());
+            connectionFactory.setPort(parameters.getPort());
+            connectionFactory.setTransportType(1);
+        } catch (JMSException e) {
+            throw new RuntimeException("Cannot create connection factory", e);
+        }
+        return connectionFactory;
+    }
+
+    private ConnectionFactoryParameters readParametersFrom(String resource) {
+        Properties properties = new Properties();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resource);
+        ConnectionFactoryParameters connectionFactoryParameters;
+        try {
+            properties.load(inputStream);
+            String queueManager = "TEST1";
+            String hostname = properties.getProperty(queueManager + ".hostname");
+            String port = properties.getProperty(queueManager + ".port");
+            String channel = properties.getProperty(queueManager + ".channel");
+
+            connectionFactoryParameters = new ConnectionFactoryParameters(queueManager, hostname, Integer.valueOf(port), channel);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot load mq.properties file", e);
+        }
+        finally {
+            closeQuietly(inputStream);
+        }
+        return connectionFactoryParameters;
+    }
+
+    private void closeQuietly(InputStream inputStream) {
+        try {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot close stream", e);
+        }
     }
 
 }
