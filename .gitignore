@@ -1,0 +1,10 @@
+*.i??
+.idea
+.project
+.classpath
+.settings
+target
+eclipse-classes
+bin
+dependency-reduced-pom.xml
+src/test/resources/mq.properties
