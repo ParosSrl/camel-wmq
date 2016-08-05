@@ -31,8 +31,6 @@
     </distributionManagement>
 
     <dependencies>
-
-        <!-- Camel -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
@@ -50,7 +48,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -62,14 +59,6 @@
             <version>1.7.21</version>
         </dependency>
 
-        <!-- OSGi -->
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>4.3.1</version>
-        </dependency>
-
-        <!-- MQ -->
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>mq</artifactId>
