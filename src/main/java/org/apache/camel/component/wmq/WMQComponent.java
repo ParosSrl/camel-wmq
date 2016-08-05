@@ -5,8 +5,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
 
 import javax.jms.JMSException;
@@ -16,9 +14,6 @@ import java.util.Map;
 import java.util.Properties;
 
 public class WMQComponent extends JmsComponent {
-
-    private final static Logger LOGGER = LoggerFactory.getLogger(WMQComponent.class);
-
 
     public WMQComponent() {
         super(WMQEndpoint.class);
@@ -36,8 +31,9 @@ public class WMQComponent extends JmsComponent {
     protected JmsConfiguration createConfiguration() {
         ConnectionFactoryParameters connectionFactoryParameters = readParametersFrom("mq.properties");
         MQConnectionFactory connectionFactory = createConnectionFactory(connectionFactoryParameters);
-        return new JmsConfiguration(connectionFactory);
-
+        JmsConfiguration jmsConfiguration = new JmsConfiguration(connectionFactory);
+        jmsConfiguration.setDestinationResolver(new WmqDestinationResolver());
+        return jmsConfiguration;
     }
 
     @Override

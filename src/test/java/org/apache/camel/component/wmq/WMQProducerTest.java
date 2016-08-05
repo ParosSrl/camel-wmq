@@ -28,7 +28,8 @@ public class WMQProducerTest extends CamelTestSupport {
             public void configure() throws Exception {
                 from("direct:input")
                     .log(body().toString())
-                    .setHeader("JMS_IBM_MQMD_ApplIdentityData", constant("APPLIDDATA_"+new Date()))
+                    .setHeader("JMS_IBM_MQMD_ApplIdentityData", constant("CAMELTESTAPPIDDATA"))
+                    .setHeader("JMS_IBM_MQMD_PutApplName", constant("Wmq camel component"))
                     .to("wmq:QRM_AWS_ENTE_OUT?username=mqm&password=mqm");
             }
         };
