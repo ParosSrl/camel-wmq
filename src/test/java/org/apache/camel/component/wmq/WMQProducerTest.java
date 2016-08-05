@@ -6,6 +6,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WMQProducerTest extends CamelTestSupport {
@@ -30,9 +31,19 @@ public class WMQProducerTest extends CamelTestSupport {
                     .log(body().toString())
                     .setHeader("JMS_IBM_MQMD_ApplIdentityData", constant("CAMELTESTAPPIDDATA"))
                     .setHeader("JMS_IBM_MQMD_PutApplName", constant("Wmq camel component"))
+                    .setHeader("JMS_IBM_PutDate", constant("20160728"))
+                    .setHeader("JMS_IBM_PutTime", constant("07004301"))
+                    .setHeader("JMS_IBM_Character_Set", constant("UTF-8"))
+                    .setHeader("JMS_IBM_Encoding", constant(273))
+                    .setHeader("JMS_IBM_MsgType", constant(8))
+                    .setHeader("JMS_IBM_PutApplType", constant(28))
                     .to("wmq:QRM_AWS_ENTE_OUT?username=mqm&password=mqm");
             }
         };
+    }
+
+    private Object toIbmPutDate(Date date) {
+        return new SimpleDateFormat("yyyyMMdd").format(date);
     }
 
 }
