@@ -10,6 +10,7 @@
 
     <properties>
         <camel.version>2.17.2</camel.version>
+        <ibm.mq.version>7</ibm.mq.version>
     </properties>
 
 
@@ -67,32 +68,32 @@
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>mq</artifactId>
-            <version>7</version>
+            <version>${ibm.mq.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>mqjms</artifactId>
-            <version>7</version>
+            <version>${ibm.mq.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>jmqi</artifactId>
-            <version>7</version>
+            <version>${ibm.mq.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>headers</artifactId>
-            <version>7</version>
+            <version>${ibm.mq.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>dhbcore</artifactId>
-            <version>7</version>
+            <version>${ibm.mq.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>commonservices</artifactId>
-            <version>7</version>
+            <version>${ibm.mq.version}</version>
         </dependency>
 
         <dependency>
