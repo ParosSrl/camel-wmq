@@ -43,16 +43,7 @@ public class WMQComponent extends JmsComponent {
             String port = properties.getProperty(queueManager + ".port");
             String channel = properties.getProperty(queueManager + ".channel");
 
-            MQConnectionFactory connectionFactory = new MQConnectionFactory();
-            try {
-                connectionFactory.setQueueManager(queueManager);
-                connectionFactory.setHostName(hostname);
-                connectionFactory.setChannel(channel);
-                connectionFactory.setPort(Integer.valueOf(port));
-                connectionFactory.setTransportType(1);
-            } catch (JMSException e) {
-                throw new RuntimeException("Cannot create connection factory", e);
-            }
+            MQConnectionFactory connectionFactory = createConnectionFactory(queueManager, hostname, port, channel);
             return new JmsConfiguration(connectionFactory);
 
         } catch (IOException e) {
@@ -68,6 +59,20 @@ public class WMQComponent extends JmsComponent {
             }
         }
 
+    }
+
+    private MQConnectionFactory createConnectionFactory(String queueManager, String hostname, String port, String channel) {
+        MQConnectionFactory connectionFactory = new MQConnectionFactory();
+        try {
+            connectionFactory.setQueueManager(queueManager);
+            connectionFactory.setHostName(hostname);
+            connectionFactory.setChannel(channel);
+            connectionFactory.setPort(Integer.valueOf(port));
+            connectionFactory.setTransportType(1);
+        } catch (JMSException e) {
+            throw new RuntimeException("Cannot create connection factory", e);
+        }
+        return connectionFactory;
     }
 
     @Override
