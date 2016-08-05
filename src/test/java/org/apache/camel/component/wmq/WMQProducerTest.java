@@ -31,8 +31,8 @@ public class WMQProducerTest extends CamelTestSupport {
                     .log(body().toString())
                     .setHeader("JMS_IBM_MQMD_ApplIdentityData", constant("CAMELTESTAPPIDDATA"))
                     .setHeader("JMS_IBM_MQMD_PutApplName", constant("Wmq camel component"))
-                    .setHeader("JMS_IBM_PutDate", constant("20160728"))
-                    .setHeader("JMS_IBM_PutTime", constant("07004301"))
+                    .setHeader("JMS_IBM_MQMD_PutDate", constant(toIbmPutDate(new Date())))
+                    .setHeader("JMS_IBM_MQMD_PutTime", constant(toIbmPutTime(new Date())))
                     .setHeader("JMS_IBM_Character_Set", constant("UTF-8"))
                     .setHeader("JMS_IBM_Encoding", constant(273))
                     .setHeader("JMS_IBM_MsgType", constant(8))
@@ -44,6 +44,10 @@ public class WMQProducerTest extends CamelTestSupport {
 
     private Object toIbmPutDate(Date date) {
         return new SimpleDateFormat("yyyyMMdd").format(date);
+    }
+
+    private Object toIbmPutTime(Date date) {
+        return new SimpleDateFormat("HHmmssSS").format(date);
     }
 
 }
