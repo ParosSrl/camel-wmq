@@ -27,19 +27,23 @@ public class WMQComponent extends JmsComponent {
     @Override
     public Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
         WMQEndpoint endpoint = new WMQEndpoint(this, uri, remaining);
+        JmsConfiguration configuration = endpoint.getConfiguration();
         String username = this.getAndRemoveParameter(parameters, "username", String.class);
         String password = this.getAndRemoveParameter(parameters, "password", String.class);
+        configuration.setConnectionFactory(createUserCredentialsConnectionFactoryAdapter(configuration, username, password));
+        return endpoint;
+    }
+
+    private UserCredentialsConnectionFactoryAdapter createUserCredentialsConnectionFactoryAdapter(JmsConfiguration configuration, String username, String password) {
+        UserCredentialsConnectionFactoryAdapter strategyVal = new UserCredentialsConnectionFactoryAdapter();
         if(username != null && password != null) {
-            JmsConfiguration configuration = endpoint.getConfiguration();
-            UserCredentialsConnectionFactoryAdapter strategyVal = new UserCredentialsConnectionFactoryAdapter();
             strategyVal.setTargetConnectionFactory(configuration.getConnectionFactory());
             strategyVal.setPassword(password);
             strategyVal.setUsername(username);
-            configuration.setConnectionFactory(strategyVal);
         } else if(username != null || password != null) {
             throw new IllegalArgumentException("The JmsComponent\'s username or password is null");
         }
-        return endpoint;
+        return strategyVal;
     }
 
     private ConnectionFactoryParameters readParametersFrom(String resource) {
