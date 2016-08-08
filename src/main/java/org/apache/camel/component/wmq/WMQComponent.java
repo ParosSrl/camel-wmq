@@ -1,12 +1,10 @@
 package org.apache.camel.component.wmq;
 
-import com.ibm.mq.jms.MQConnectionFactory;
 import org.apache.camel.Endpoint;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
 
-import javax.jms.JMSException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -21,8 +19,7 @@ public class WMQComponent extends JmsComponent {
     @Override
     protected JmsConfiguration createConfiguration() {
         ConnectionFactoryParameters connectionFactoryParameters = readParametersFrom("mq.properties");
-        MQConnectionFactory connectionFactory = createConnectionFactory(connectionFactoryParameters);
-        JmsConfiguration jmsConfiguration = new JmsConfiguration(connectionFactory);
+        JmsConfiguration jmsConfiguration = new JmsConfiguration(new WmqConnectionFactory(connectionFactoryParameters));
         jmsConfiguration.setDestinationResolver(new WmqDestinationResolver());
         return jmsConfiguration;
     }
@@ -43,20 +40,6 @@ public class WMQComponent extends JmsComponent {
             throw new IllegalArgumentException("The JmsComponent\'s username or password is null");
         }
         return endpoint;
-    }
-
-    private MQConnectionFactory createConnectionFactory(ConnectionFactoryParameters parameters) {
-        MQConnectionFactory connectionFactory = new MQConnectionFactory();
-        try {
-            connectionFactory.setQueueManager(parameters.getQueueManager());
-            connectionFactory.setHostName(parameters.getHostname());
-            connectionFactory.setChannel(parameters.getChannel());
-            connectionFactory.setPort(parameters.getPort());
-            connectionFactory.setTransportType(1);
-        } catch (JMSException e) {
-            throw new RuntimeException("Cannot create connection factory", e);
-        }
-        return connectionFactory;
     }
 
     private ConnectionFactoryParameters readParametersFrom(String resource) {
