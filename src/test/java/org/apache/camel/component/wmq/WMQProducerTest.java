@@ -1,7 +1,9 @@
 package org.apache.camel.component.wmq;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
 import org.apache.camel.RoutesBuilder;
+import org.apache.camel.builder.ExchangeBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
@@ -16,8 +18,26 @@ public class WMQProducerTest extends CamelTestSupport {
     }
 
     @Test
-    public void test() throws Exception {
-        template().sendBody("direct:input", "aa2e23rwe");
+    public void set_default_values_for_app_id_data() throws Exception {
+        Exchange exchange = ExchangeBuilder.anExchange(context())
+                .withBody("any")
+                .build();
+
+        template().send("direct:input", exchange);
+
+        assertNotNull(exchange.getIn().getHeader("JMS_IBM_MQMD_ApplIdentityData"));
+    }
+
+    @Test
+    public void set_application_id_data_over_default() throws Exception {
+        Exchange exchange = ExchangeBuilder.anExchange(context())
+                .withBody("any")
+                .withHeader("JMS_IBM_MQMD_ApplIdentityData", "CUSTOMAPPIDDATA")
+                .build();
+
+        template().send("direct:input", exchange);
+
+        assertEquals("CUSTOMAPPIDDATA", exchange.getIn().getHeader("JMS_IBM_MQMD_ApplIdentityData"));
     }
 
     private RoutesBuilder route() {
@@ -26,7 +46,6 @@ public class WMQProducerTest extends CamelTestSupport {
             public void configure() throws Exception {
                 from("direct:input")
                     .log(body().toString())
-                    .setHeader("JMS_IBM_MQMD_ApplIdentityData", constant("CAMELTESTAPPIDDATA"))
                     .to("wmq:QRM_AWS_ENTE_OUT?username=mqm&password=mqm");
             }
         };

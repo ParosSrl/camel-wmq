@@ -25,7 +25,7 @@ public class WMQProducer extends JmsProducer {
         setDefaultHeader(in, "JMS_IBM_MsgType", 8);
         setDefaultHeader(in, "JMS_IBM_PutApplType", 28);
         setDefaultHeader(in, "JMS_IBM_PutApplType", 28);
-        setDefaultHeader(in, "JMS_IBM_MQMD_ApplIdentityData", "Default value");
+        setDefaultHeader(in, "JMS_IBM_MQMD_ApplIdentityData", "DEFAULT");
         return super.process(exchange, callback);
     }
 
