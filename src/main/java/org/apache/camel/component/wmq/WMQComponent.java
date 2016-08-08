@@ -1,7 +1,6 @@
 package org.apache.camel.component.wmq;
 
 import com.ibm.mq.jms.MQConnectionFactory;
-import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
@@ -17,14 +16,6 @@ public class WMQComponent extends JmsComponent {
 
     public WMQComponent() {
         super(WMQEndpoint.class);
-    }
-
-    public WMQComponent(CamelContext camelContext) {
-        super(camelContext, WMQEndpoint.class);
-    }
-
-    public WMQComponent(JmsConfiguration configuration) {
-        super(configuration);
     }
 
     @Override
