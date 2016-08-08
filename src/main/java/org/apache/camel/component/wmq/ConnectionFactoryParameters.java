@@ -17,13 +17,12 @@ public class ConnectionFactoryParameters {
         this.channel = channel;
     }
 
-    public static ConnectionFactoryParameters readParametersFrom(String resource) {
+    public static ConnectionFactoryParameters readParametersFrom(String resource, String queueManager) {
         Properties properties = new Properties();
         InputStream inputStream = ConnectionFactoryParameters.class.getClassLoader().getResourceAsStream(resource);
         ConnectionFactoryParameters connectionFactoryParameters;
         try {
             properties.load(inputStream);
-            String queueManager = "TEST1";
             String hostname = properties.getProperty(queueManager + ".hostname");
             String port = properties.getProperty(queueManager + ".port");
             String channel = properties.getProperty(queueManager + ".channel");

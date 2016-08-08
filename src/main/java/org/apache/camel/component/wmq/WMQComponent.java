@@ -15,7 +15,7 @@ public class WMQComponent extends JmsComponent {
 
     @Override
     protected JmsConfiguration createConfiguration() {
-        ConnectionFactoryParameters connectionFactoryParameters = ConnectionFactoryParameters.readParametersFrom("mq.properties");
+        ConnectionFactoryParameters connectionFactoryParameters = ConnectionFactoryParameters.readParametersFrom("mq.properties", "TEST1");
         JmsConfiguration jmsConfiguration = new JmsConfiguration(new WmqConnectionFactory(connectionFactoryParameters));
         jmsConfiguration.setDestinationResolver(new WmqDestinationResolver());
         return jmsConfiguration;
