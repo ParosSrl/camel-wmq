@@ -8,19 +8,19 @@ import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapte
 
 import java.util.Map;
 
-public class WMQComponent extends JmsComponent {
+public class WmqComponent extends JmsComponent {
 
     private final String queueManager;
     private final String hostname;
     private final String channel;
     private final Integer port;
 
-    public WMQComponent() {
+    public WmqComponent() {
         this(null, null, null, null);
     }
 
-    public WMQComponent(String hostname, Integer port, String queueManager, String channel) {
-        super(WMQEndpoint.class);
+    public WmqComponent(String hostname, Integer port, String queueManager, String channel) {
+        super(WmqEndpoint.class);
         this.queueManager = queueManager;
         this.hostname = hostname;
         this.channel = channel;
@@ -28,7 +28,7 @@ public class WMQComponent extends JmsComponent {
     }
 
     public static Component newWmqComponent(String hostname, Integer port, String queueManager, String channel) {
-        return new WMQComponent(hostname, port, queueManager, channel);
+        return new WmqComponent(hostname, port, queueManager, channel);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class WMQComponent extends JmsComponent {
 
     @Override
     public Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
-        WMQEndpoint endpoint = new WMQEndpoint(this, uri, remaining);
+        WmqEndpoint endpoint = new WmqEndpoint(this, uri, remaining);
         JmsConfiguration configuration = endpoint.getConfiguration();
         String username = this.getAndRemoveParameter(parameters, "username", String.class);
         String password = this.getAndRemoveParameter(parameters, "password", String.class);

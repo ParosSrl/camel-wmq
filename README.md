@@ -6,7 +6,7 @@ Try to set a component to deal with IBM MQ in camel
 
 Add the component to your camel context passing configuration parameters:  
 ``` 
-context.addComponent("wmq", WMQComponent.newWmqComponent(hostname, port, queueManager, channel);
+context.addComponent("wmq", WmqComponent.newWmqComponent(hostname, port, queueManager, channel);
 ```
 
 ### As producer

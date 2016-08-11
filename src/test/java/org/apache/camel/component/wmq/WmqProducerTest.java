@@ -8,9 +8,9 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import static org.apache.camel.component.wmq.WMQComponent.newWmqComponent;
+import static org.apache.camel.component.wmq.WmqComponent.newWmqComponent;
 
-public class WMQProducerTest extends CamelTestSupport {
+public class WmqProducerTest extends CamelTestSupport {
 
     @Override
     protected CamelContext createCamelContext() throws Exception {

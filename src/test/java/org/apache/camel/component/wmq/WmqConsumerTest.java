@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class WMQConsumerTest extends CamelTestSupport {
+public class WmqConsumerTest extends CamelTestSupport {
 
     @Override
     protected RoutesBuilder createRouteBuilder() throws Exception {

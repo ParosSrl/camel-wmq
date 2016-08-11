@@ -8,9 +8,9 @@ import org.apache.camel.component.jms.JmsProducer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class WMQProducer extends JmsProducer {
+public class WmqProducer extends JmsProducer {
 
-    public WMQProducer(WMQEndpoint endpoint) {
+    public WmqProducer(WmqEndpoint endpoint) {
         super(endpoint);
     }
 

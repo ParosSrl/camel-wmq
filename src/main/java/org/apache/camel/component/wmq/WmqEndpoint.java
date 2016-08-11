@@ -8,22 +8,22 @@ import org.apache.camel.component.jms.JmsEndpoint;
 import org.apache.camel.spi.UriEndpoint;
 
 @ManagedResource(description = "Managed WMQ Endpoint")
-@UriEndpoint(scheme = "wmq", syntax = "", consumerClass = WMQConsumer.class, title = "WMQ Endpoint")
-public class WMQEndpoint extends JmsEndpoint {
+@UriEndpoint(scheme = "wmq", syntax = "", consumerClass = WmqConsumer.class, title = "WMQ Endpoint")
+public class WmqEndpoint extends JmsEndpoint {
 
-    public WMQEndpoint(WMQComponent component, String uri, String destinationName) {
+    public WmqEndpoint(WmqComponent component, String uri, String destinationName) {
         super(uri, destinationName, false);
         setConfiguration(component.createConfiguration());
     }
 
     @Override
     public Producer createProducer() throws Exception {
-        return new WMQProducer(this);
+        return new WmqProducer(this);
     }
 
     @Override
     public JmsConsumer createConsumer(Processor processor) throws Exception {
-        return new WMQConsumer(this, processor);
+        return new WmqConsumer(this, processor);
     }
 
 }
