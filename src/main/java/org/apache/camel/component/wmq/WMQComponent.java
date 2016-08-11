@@ -9,16 +9,22 @@ import java.util.Map;
 
 public class WMQComponent extends JmsComponent {
 
+    private JmsConfiguration configuration;
+
     public WMQComponent() {
         super(WMQEndpoint.class);
+    }
+
+    public WMQComponent(JmsConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     @Override
     protected JmsConfiguration createConfiguration() {
         ConnectionFactoryParameters connectionFactoryParameters = ConnectionFactoryParameters.readParametersFrom("mq.properties", "TEST1");
-        JmsConfiguration jmsConfiguration = new JmsConfiguration(new WmqConnectionFactory(connectionFactoryParameters));
-        jmsConfiguration.setDestinationResolver(new WmqDestinationResolver());
-        return jmsConfiguration;
+        configuration.setConnectionFactory(new WmqConnectionFactory(connectionFactoryParameters));
+        configuration.setDestinationResolver(new WmqDestinationResolver());
+        return configuration;
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.ExchangeBuilder;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jms.JmsConfiguration;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
@@ -14,6 +15,7 @@ public class WMQProducerTest extends CamelTestSupport {
     protected CamelContext createCamelContext() throws Exception {
         CamelContext context = super.createCamelContext();
         context.addRoutes(route());
+        context.addComponent("wmq", new WMQComponent(new JmsConfiguration()));
         return context;
     }
 
