@@ -37,5 +37,5 @@ It binds IBM properties by default on message headers
 
 ```
 from("wmq:<queue_name>?username=<username>&password=<password>")
-    .to(<your_endpont>)
+    .to(<your_endpoint>)
 ```
