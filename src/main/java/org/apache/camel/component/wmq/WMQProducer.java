@@ -35,7 +35,6 @@ public class WMQProducer extends JmsProducer {
         }
     }
 
-
     private Object toIbmPutDate(Date date) {
         return new SimpleDateFormat("yyyyMMdd").format(date);
     }

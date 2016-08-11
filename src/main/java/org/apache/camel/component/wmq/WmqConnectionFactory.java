@@ -6,16 +6,15 @@ import javax.jms.JMSException;
 
 public class WmqConnectionFactory extends MQConnectionFactory {
 
-    public WmqConnectionFactory(WmqConnectionParameters parameters) {
+    public WmqConnectionFactory(String hostname, Integer port, String queueManager, String channel) {
         try {
-            setQueueManager(parameters.getQueueManager());
-            setHostName(parameters.getHostname());
-            setChannel(parameters.getChannel());
-            setPort(parameters.getPort());
+            setHostName(hostname);
+            setPort(port);
+            setQueueManager(queueManager);
+            setChannel(channel);
             setTransportType(1);
         } catch (JMSException e) {
             throw new RuntimeException("Cannot create connection factory", e);
         }
     }
-
 }

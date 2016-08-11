@@ -33,9 +33,8 @@ public class WMQComponent extends JmsComponent {
 
     @Override
     protected JmsConfiguration createConfiguration() {
-        WmqConnectionParameters parameters = new WmqConnectionParameters(queueManager, hostname, port, channel);
         JmsConfiguration configuration = new JmsConfiguration();
-        configuration.setConnectionFactory(new WmqConnectionFactory(parameters));
+        configuration.setConnectionFactory(new WmqConnectionFactory(hostname, port, queueManager, channel));
         configuration.setDestinationResolver(new WmqDestinationResolver());
         return configuration;
     }
