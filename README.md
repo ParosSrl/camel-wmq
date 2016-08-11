@@ -18,7 +18,7 @@ from("direct:sendMessage")
     .to("wmq:<queue_name>?username=<username>&password=<password>")
 ```
 
-By default, the component sets defaulta values for some IBM properties:
+By default, the component sets default values for some IBM properties:
  - JMS_IBM_MQMD_PutDate
  - JMS_IBM_MQMD_PutTime
  - JMS_IBM_MQMD_PutApplName
