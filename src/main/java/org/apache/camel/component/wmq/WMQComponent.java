@@ -1,5 +1,6 @@
 package org.apache.camel.component.wmq;
 
+import org.apache.camel.Component;
 import org.apache.camel.Endpoint;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
@@ -9,20 +10,32 @@ import java.util.Map;
 
 public class WMQComponent extends JmsComponent {
 
-    private JmsConfiguration configuration;
+    private final String queueManager;
+    private final String hostname;
+    private final String channel;
+    private final Integer port;
 
     public WMQComponent() {
-        super(WMQEndpoint.class);
+        this(null, null, null, null);
     }
 
-    public WMQComponent(JmsConfiguration configuration) {
-        this.configuration = configuration;
+    public WMQComponent(String hostname, Integer port, String queueManager, String channel) {
+        super(WMQEndpoint.class);
+        this.queueManager = queueManager;
+        this.hostname = hostname;
+        this.channel = channel;
+        this.port = port;
+    }
+
+    public static Component newWmqComponent(String hostname, Integer port, String queueManager, String channel) {
+        return new WMQComponent(hostname, port, queueManager, channel);
     }
 
     @Override
     protected JmsConfiguration createConfiguration() {
-        ConnectionFactoryParameters connectionFactoryParameters = ConnectionFactoryParameters.readParametersFrom("mq.properties", "TEST1");
-        configuration.setConnectionFactory(new WmqConnectionFactory(connectionFactoryParameters));
+        WmqConnectionParameters parameters = new WmqConnectionParameters(queueManager, hostname, port, channel);
+        JmsConfiguration configuration = new JmsConfiguration();
+        configuration.setConnectionFactory(new WmqConnectionFactory(parameters));
         configuration.setDestinationResolver(new WmqDestinationResolver());
         return configuration;
     }
@@ -48,5 +61,4 @@ public class WMQComponent extends JmsComponent {
         }
         return strategyVal;
     }
-
 }

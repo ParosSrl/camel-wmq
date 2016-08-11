@@ -6,7 +6,7 @@ import javax.jms.JMSException;
 
 public class WmqConnectionFactory extends MQConnectionFactory {
 
-    public WmqConnectionFactory(ConnectionFactoryParameters parameters) {
+    public WmqConnectionFactory(WmqConnectionParameters parameters) {
         try {
             setQueueManager(parameters.getQueueManager());
             setHostName(parameters.getHostname());

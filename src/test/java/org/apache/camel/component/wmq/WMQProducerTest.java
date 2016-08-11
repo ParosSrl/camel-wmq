@@ -5,9 +5,10 @@ import org.apache.camel.Exchange;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.ExchangeBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.jms.JmsConfiguration;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
+
+import static org.apache.camel.component.wmq.WMQComponent.newWmqComponent;
 
 public class WMQProducerTest extends CamelTestSupport {
 
@@ -15,7 +16,7 @@ public class WMQProducerTest extends CamelTestSupport {
     protected CamelContext createCamelContext() throws Exception {
         CamelContext context = super.createCamelContext();
         context.addRoutes(route());
-        context.addComponent("wmq", new WMQComponent(new JmsConfiguration()));
+        context.addComponent("wmq", newWmqComponent("hostname", 1514, "TEST1", "SYSTEM.DEF.SVRCONN"));
         return context;
     }
 
