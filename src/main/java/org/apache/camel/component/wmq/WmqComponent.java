@@ -1,6 +1,5 @@
 package org.apache.camel.component.wmq;
 
-import org.apache.camel.Component;
 import org.apache.camel.Endpoint;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
@@ -27,7 +26,7 @@ public class WmqComponent extends JmsComponent {
         this.port = port;
     }
 
-    public static Component newWmqComponent(String hostname, Integer port, String queueManager, String channel) {
+    public static WmqComponent newWmqComponent(String hostname, Integer port, String queueManager, String channel) {
         return new WmqComponent(hostname, port, queueManager, channel);
     }
 
