@@ -16,7 +16,7 @@ public class WmqProducerTest extends CamelTestSupport {
     protected CamelContext createCamelContext() throws Exception {
         CamelContext context = super.createCamelContext();
         context.addRoutes(route());
-        context.addComponent("wmq", newWmqComponent("hostname", 1514, "TEST1", "SYSTEM.DEF.SVRCONN"));
+        context.addComponent("wmq", newWmqComponent("host", 1514, "TEST1", "SYSTEM.DEF.SVRCONN"));
         return context;
     }
 
@@ -49,7 +49,7 @@ public class WmqProducerTest extends CamelTestSupport {
             public void configure() throws Exception {
                 from("direct:input")
                     .log(body().toString())
-                    .to("wmq:QRM_AWS_ENTE_OUT?username=mqm&password=mqm");
+                    .to("wmq:PROVA.TEST1?username=mqm&password=mqm");
             }
         };
     }

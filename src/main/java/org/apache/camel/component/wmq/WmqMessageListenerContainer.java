@@ -9,6 +9,7 @@ public class WmqMessageListenerContainer extends DefaultJmsMessageListenerContai
         super(endpoint);
         setConnectionFactory(endpoint.getConnectionFactory());
         setDestinationName(endpoint.getDestinationName());
+        setDestinationResolver(endpoint.getDestinationResolver());
     }
 
 }
