@@ -25,7 +25,7 @@ public class WmqConsumerTest extends CamelTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("wmq:PROVA.TEST1?username=mqm&password=mqm")
+                from("wmq:PROVA.TEST1?username=mqm&password=mqm&concurrentConsumers=5")
                     .log("APPL_ID_DATA: ${header.JMS_IBM_MQMD_ApplIdentityData}")
                     .log(body().toString())
                     .to("mock:end");

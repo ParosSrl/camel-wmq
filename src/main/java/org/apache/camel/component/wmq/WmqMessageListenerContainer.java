@@ -10,6 +10,7 @@ public class WmqMessageListenerContainer extends DefaultJmsMessageListenerContai
         setConnectionFactory(endpoint.getConnectionFactory());
         setDestinationName(endpoint.getDestinationName());
         setDestinationResolver(endpoint.getDestinationResolver());
+        setConcurrentConsumers(endpoint.getConfiguration().getConcurrentConsumers());
     }
 
 }
