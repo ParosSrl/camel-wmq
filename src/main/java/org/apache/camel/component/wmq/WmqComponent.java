@@ -5,6 +5,7 @@ import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.jms.JmsConfiguration;
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
 
+import javax.jms.ConnectionFactory;
 import java.util.Map;
 
 public class WmqComponent extends JmsComponent {
@@ -44,14 +45,14 @@ public class WmqComponent extends JmsComponent {
         JmsConfiguration configuration = endpoint.getConfiguration();
         String username = this.getAndRemoveParameter(parameters, "username", String.class);
         String password = this.getAndRemoveParameter(parameters, "password", String.class);
-        configuration.setConnectionFactory(createUserCredentialsConnectionFactoryAdapter(configuration, username, password));
+        configuration.setConnectionFactory(createUserCredentialsConnectionFactoryAdapter(configuration.getConnectionFactory(), username, password));
         return endpoint;
     }
 
-    private UserCredentialsConnectionFactoryAdapter createUserCredentialsConnectionFactoryAdapter(JmsConfiguration configuration, String username, String password) {
+    private UserCredentialsConnectionFactoryAdapter createUserCredentialsConnectionFactoryAdapter(ConnectionFactory connectionFactory, String username, String password) {
         UserCredentialsConnectionFactoryAdapter strategyVal = new UserCredentialsConnectionFactoryAdapter();
         if(username != null && password != null) {
-            strategyVal.setTargetConnectionFactory(configuration.getConnectionFactory());
+            strategyVal.setTargetConnectionFactory(connectionFactory);
             strategyVal.setPassword(password);
             strategyVal.setUsername(username);
         } else if(username != null || password != null) {
