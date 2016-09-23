@@ -35,11 +35,11 @@ public class WmqProducer extends JmsProducer {
         }
     }
 
-    private Object toIbmPutDate(Date date) {
+    private String toIbmPutDate(Date date) {
         return new SimpleDateFormat("yyyyMMdd").format(date);
     }
 
-    private Object toIbmPutTime(Date date) {
+    private String toIbmPutTime(Date date) {
         return new SimpleDateFormat("HHmmssSS").format(date);
     }
 }
