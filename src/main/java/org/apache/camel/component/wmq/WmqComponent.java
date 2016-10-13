@@ -50,14 +50,14 @@ public class WmqComponent extends JmsComponent {
     }
 
     private UserCredentialsConnectionFactoryAdapter createUserCredentialsConnectionFactoryAdapter(ConnectionFactory connectionFactory, String username, String password) {
-        UserCredentialsConnectionFactoryAdapter strategyVal = new UserCredentialsConnectionFactoryAdapter();
-        if(username != null && password != null) {
-            strategyVal.setTargetConnectionFactory(connectionFactory);
-            strategyVal.setPassword(password);
-            strategyVal.setUsername(username);
-        } else if(username != null || password != null) {
+        UserCredentialsConnectionFactoryAdapter adapter = new UserCredentialsConnectionFactoryAdapter();
+        if (username != null && password != null) {
+            adapter.setTargetConnectionFactory(connectionFactory);
+            adapter.setPassword(password);
+            adapter.setUsername(username);
+        } else {
             throw new IllegalArgumentException("The JmsComponent\'s username or password is null");
         }
-        return strategyVal;
+        return adapter;
     }
 }
