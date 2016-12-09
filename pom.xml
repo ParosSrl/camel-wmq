@@ -44,6 +44,13 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
             <version>${camel.version}</version>
         </dependency>
@@ -51,12 +58,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jms</artifactId>
             <version>${camel.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test</artifactId>
-            <version>${camel.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -87,30 +88,16 @@
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
-            <artifactId>headers</artifactId>
-            <version>${ibm.mq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.mq</groupId>
             <artifactId>dhbcore</artifactId>
             <version>${ibm.mq.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.ibm.mq</groupId>
-            <artifactId>commonservices</artifactId>
-            <version>${ibm.mq.version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>javax.resource</groupId>
-            <artifactId>connector</artifactId>
-            <version>1.0</version>
-        </dependency>
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>javax.jms-api</artifactId>
             <version>2.0.1</version>
         </dependency>
+
     </dependencies>
 
     <build>
