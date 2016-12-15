@@ -14,6 +14,7 @@ public class WmqComponent extends JmsComponent {
     private final String hostname;
     private final String channel;
     private final Integer port;
+    private boolean excludeRFHeaders;
 
     public WmqComponent() {
         this(null, null, null, null);
@@ -31,11 +32,16 @@ public class WmqComponent extends JmsComponent {
         return new WmqComponent(hostname, port, queueManager, channel);
     }
 
+    public WmqComponent excludeRFHeaders() {
+        excludeRFHeaders = true;
+        return this;
+    }
+
     @Override
     protected JmsConfiguration createConfiguration() {
         JmsConfiguration configuration = new JmsConfiguration();
         configuration.setConnectionFactory(new WmqConnectionFactory(hostname, port, queueManager, channel));
-        configuration.setDestinationResolver(new WmqDestinationResolver());
+        configuration.setDestinationResolver(new WmqDestinationResolver(excludeRFHeaders));
         return configuration;
     }
 

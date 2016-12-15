@@ -13,7 +13,8 @@ public class ComponentTest extends CamelTestSupport {
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext context = super.createCamelContext();
-        context.addComponent("wmq", newWmqComponent("test", 1514, "TEST1", "SYSTEM.DEF.SVRCONN"));
+        context.addComponent("wmq", newWmqComponent("test", 1514, "TEST1", "SYSTEM.DEF.SVRCONN")
+                                        .excludeRFHeaders());
         return context;
     }
 

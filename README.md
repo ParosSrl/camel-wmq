@@ -9,6 +9,9 @@ Add the component to your camel context passing configuration parameters:
 context.addComponent("wmq", WmqComponent.newWmqComponent(hostname, port, queueManager, channel);
 ```
 
+**Exclude RF Headers**
+If there's need to exclude RF headers from jms message, use the `excludeRFHeaders` method on the component.
+
 ### As producer
 
 Then you can send messages to a queue passing custom IBM properties as header:
