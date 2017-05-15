@@ -5,7 +5,7 @@
 
     <groupId>srl.paros</groupId>
     <artifactId>camel-wmq</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>bundle</packaging>
 
     <properties>
@@ -68,6 +68,12 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jms</artifactId>
             <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>apt</artifactId>
+            <version>${camel.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -145,7 +151,21 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-package-maven-plugin</artifactId>
+                <version>2.18.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-components-list</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
