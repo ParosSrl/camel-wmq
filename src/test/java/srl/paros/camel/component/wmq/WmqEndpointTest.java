@@ -1,4 +1,4 @@
-package org.apache.camel.component.wmq;
+package srl.paros.camel.component.wmq;
 
 import org.junit.Rule;
 import org.junit.Test;

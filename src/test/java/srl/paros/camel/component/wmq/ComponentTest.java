@@ -1,4 +1,4 @@
-package org.apache.camel.component.wmq;
+package srl.paros.camel.component.wmq;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -6,7 +6,7 @@ import org.apache.camel.Message;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-import static org.apache.camel.component.wmq.WmqComponent.newWmqComponent;
+import static srl.paros.camel.component.wmq.WmqComponent.newWmqComponent;
 
 public class ComponentTest extends CamelTestSupport {
 

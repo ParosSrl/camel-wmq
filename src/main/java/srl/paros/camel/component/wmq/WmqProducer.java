@@ -1,4 +1,4 @@
-package org.apache.camel.component.wmq;
+package srl.paros.camel.component.wmq;
 
 import org.apache.camel.AsyncCallback;
 import org.apache.camel.Exchange;

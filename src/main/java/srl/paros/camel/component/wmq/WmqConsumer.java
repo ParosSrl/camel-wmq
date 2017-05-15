@@ -1,4 +1,4 @@
-package org.apache.camel.component.wmq;
+package srl.paros.camel.component.wmq;
 
 import org.apache.camel.Processor;
 import org.apache.camel.component.jms.JmsConsumer;

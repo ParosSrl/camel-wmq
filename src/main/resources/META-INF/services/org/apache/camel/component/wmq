@@ -1,1 +1,1 @@
-class=org.apache.camel.component.wmq.WmqComponent
+class=srl.paros.camel.component.wmq.WmqComponent
