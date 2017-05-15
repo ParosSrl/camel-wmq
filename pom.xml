@@ -9,7 +9,8 @@
     <packaging>bundle</packaging>
 
     <properties>
-        <camel.version>[2.18.0,)</camel.version>
+        <minimum.camel.version>2.18.0</minimum.camel.version>
+        <camel.version>[${minimum.camel.version},)</camel.version>
         <ibm.mq.version>7</ibm.mq.version>
     </properties>
 
@@ -154,7 +155,7 @@
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-package-maven-plugin</artifactId>
-                <version>2.18.0</version>
+                <version>${minimum.camel.version}</version>
                 <executions>
                     <execution>
                         <goals>
