@@ -5,11 +5,11 @@
 
     <groupId>srl.paros</groupId>
     <artifactId>camel-wmq</artifactId>
-    <version>2.18.3-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
 
     <properties>
-        <camel.version>2.18.3</camel.version>
+        <camel.version>[2.18.0,)</camel.version>
         <ibm.mq.version>7</ibm.mq.version>
     </properties>
 
