@@ -5,13 +5,15 @@
 
     <groupId>srl.paros</groupId>
     <artifactId>camel-wmq</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <packaging>bundle</packaging>
 
     <properties>
-        <minimum.camel.version>2.18.0</minimum.camel.version>
+        <minimum.camel.version>2.20.1</minimum.camel.version>
         <camel.version>[${minimum.camel.version},)</camel.version>
         <ibm.mq.version>7</ibm.mq.version>
+        <mockito.version>2.13.0</mockito.version>
+        <logback.version>1.2.3</logback.version>
     </properties>
 
     <prerequisites>
@@ -44,7 +46,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.3.5</version>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -56,7 +58,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.1.8</version>
+            <version>${logback.version}</version>
             <scope>test</scope>
         </dependency>
 
