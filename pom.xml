@@ -9,10 +9,11 @@
     <packaging>bundle</packaging>
 
     <properties>
-        <minimum.camel.version>2.20.1</minimum.camel.version>
-        <camel.version>[${minimum.camel.version},)</camel.version>
+        <minimum.camel.version>2.23.0</minimum.camel.version>
+        <maximum.camel.version>2.99.0</maximum.camel.version>
+        <camel.version>[${minimum.camel.version},${maximum.camel.version})</camel.version>
         <ibm.mq.version>7</ibm.mq.version>
-        <mockito.version>2.13.0</mockito.version>
+        <mockito.version>2.23.4</mockito.version>
         <logback.version>1.2.3</logback.version>
     </properties>
 
